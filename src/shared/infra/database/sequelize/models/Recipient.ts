@@ -11,7 +11,6 @@ export default (sequelize, DataTypes) => {
       recipient_email: {
         type: DataTypes.STRING(250),
         allowNull: false,
-        unique: true,
       },
       recipient_name: {
         type: DataTypes.STRING(250),
@@ -42,7 +41,6 @@ export default (sequelize, DataTypes) => {
       timestamps: true,
       underscored: true,
       tableName: "recipient",
-      indexes: [{ unique: true, fields: ["recipient_email"] }],
     }
   );
 

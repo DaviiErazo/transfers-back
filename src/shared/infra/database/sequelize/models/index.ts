@@ -5,6 +5,7 @@ import config from '../config/config'
 import * as Sequelize from 'sequelize'
 
 const sequelize = config.connection;
+const Op = Sequelize.Op;
 
 // turns base_user => BaseUser
 function toCamelCase (str) {
@@ -57,5 +58,6 @@ const createModels = () => {
 export default createModels();
 
 export {
-  createModels
+  createModels,
+  Op
 }

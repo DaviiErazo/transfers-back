@@ -4,6 +4,7 @@ import { Recipient } from "../domain/recipient";
 import { RecipientEmail } from "../domain/recipientEmail";
 import { RecipientName } from "../domain/recipientName";
 import { RecipientRut } from "../domain/recipientRut";
+import { RecipientDTO } from "../dtos/recipientDTO";
 
 export class RecipientMap implements Mapper<Recipient> {
   public static async toPersistence(recipient: Recipient): Promise<any> {
@@ -20,6 +21,7 @@ export class RecipientMap implements Mapper<Recipient> {
   }
 
   public static toDomain(raw: any): Recipient {
+
     const nameOrError = RecipientName.create({ name: raw.recipient_name });
     const rutOrError = RecipientRut.create(raw.recipient_rut);
     const emailOrError = RecipientEmail.create(raw.recipient_email);
@@ -31,14 +33,25 @@ export class RecipientMap implements Mapper<Recipient> {
         email: emailOrError.getValue(),
         accountNumber: raw.recipient_account_number,
         phoneNumber: raw.recipient_phone_number,
-        bank: raw.bank,
-        type: raw.type,
-      },
-      new UniqueEntityID(raw.recipient_id)
-    );
+        bank: raw.recipient_bank,
+        type: raw.recipient_type,
+      }, new UniqueEntityID(raw.recipient_id));
 
     recipientOrError.isFailure ? console.log(recipientOrError.error) : "";
 
     return recipientOrError.isSuccess ? recipientOrError.getValue() : null;
+  }
+
+  public static toDTO(recipient: Recipient): RecipientDTO {
+    return {
+      recipientId: recipient.recipientId.id.toString(),
+      email: recipient.email.value,
+      recipientName: recipient.recipientname.value,
+      rut: recipient.rut.value,
+      phoneNumber: recipient.phoneNumber,
+      accountNumber: recipient.accountNumber,
+      type: recipient.type,
+      bank: recipient.bank,
+    };
   }
 }

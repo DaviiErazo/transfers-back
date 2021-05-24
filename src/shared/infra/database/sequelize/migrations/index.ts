@@ -13,7 +13,6 @@ export default {
         recipient_email: {
           type: Sequelize.STRING(250),
           allowNull: false,
-          unique: true,
         },
         recipient_name: {
           type: Sequelize.STRING(250),

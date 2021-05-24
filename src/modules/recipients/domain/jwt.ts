@@ -5,4 +5,5 @@ export interface JWTClaims {
   name: string;
   phoneNumber: string;
   accountNumber: number;
+  recipientName: string;
 }

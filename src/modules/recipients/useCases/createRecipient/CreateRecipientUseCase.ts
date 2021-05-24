@@ -41,11 +41,14 @@ export class CreateRecipientUseCase implements UseCase<CreateRecipientDTO, Promi
     const name: RecipientName = nameOrError.getValue();
 
     try {
+
+      /*
       const recipientAlreadyExists = await this.recipientRepo.exists(email);
 
       if (recipientAlreadyExists) {
         return left(new CreateRecipientErrors.EmailAlreadyExistsError(email.value)) as Response;
       }
+      */
 
       const recipientOrError: Result<Recipient> = Recipient.create({
         email,
