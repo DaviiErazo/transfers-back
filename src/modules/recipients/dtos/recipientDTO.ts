@@ -1,3 +1,6 @@
+import { BankType } from '../domain/bankType';
+import { AccountType } from '../domain/accountType';
+
 export interface RecipientDTO {
   recipientName: string;
   recipientId: string;
@@ -5,6 +8,6 @@ export interface RecipientDTO {
   email: string;
   phoneNumber: string;
   accountNumber: Number;
-  type: string;
-  bank: string;
+  type: AccountType;
+  bank: BankType;
 }

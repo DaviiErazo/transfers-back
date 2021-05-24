@@ -84,7 +84,10 @@ export default {
         },
       });
 
-    await runner.run([() => CREATE_RECIPIENT(), () => CREATE_TRANSFER()]);
+    await runner.run([
+      () => CREATE_RECIPIENT(),
+      () => CREATE_TRANSFER(),
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {

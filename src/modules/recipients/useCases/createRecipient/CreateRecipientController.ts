@@ -5,7 +5,6 @@ import { DecodedExpressRequest } from "../../infra/http/models/decodedRequest";
 import { CreateRecipientErrors } from "./CreateRecipientErrors";
 import { TextUtils } from "../../../../shared/utils/TextUtils";
 
-
 import * as express from "express";
 
 export class CreateRecipientController extends BaseController {
@@ -25,8 +24,8 @@ export class CreateRecipientController extends BaseController {
       rut: TextUtils.sanitize(dto.rut),
       phoneNumber: TextUtils.sanitize(dto.phoneNumber),
       accountNumber: dto.accountNumber,
-      bank: TextUtils.sanitize(dto.bank),
-      type: TextUtils.sanitize(dto.type)
+      bank: dto.bank,
+      type: dto.type,
     };
 
     try {
@@ -38,7 +37,7 @@ export class CreateRecipientController extends BaseController {
           case CreateRecipientErrors.EmailAlreadyExistsError:
             return this.conflict(res, error.errorValue().message);
           default:
-            return this.fail(res, error.errorValue().message);
+            return this.fail(res, error.error);
         }
       } else {
         return this.ok(res);

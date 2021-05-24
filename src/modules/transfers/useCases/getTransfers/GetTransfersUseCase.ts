@@ -17,7 +17,7 @@ export class GetTransfersUseCase implements UseCase<any, Promise<Response>> {
     let results: Transfer[];
 
     try {
-      results = await this.transferRepo.getAllTransfers();
+      results = await this.transferRepo.getTransfers();
     } catch (err) {
       return left(new AppError.UnexpectedError(err)) as Response;
     }

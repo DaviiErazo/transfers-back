@@ -8,6 +8,8 @@ import { RecipientId } from "./recipientId";
 import { RecipientName } from "./recipientName";
 import { RecipientRut } from "./recipientRut";
 import { RecipientCreated } from "./events/RecipientCreated";
+import { BankType } from "./bankType";
+import { AccountType } from "./accountType";
 
 interface RecipientProps {
   email: RecipientEmail;
@@ -15,8 +17,8 @@ interface RecipientProps {
   rut: RecipientRut;
   phoneNumber: string;
   accountNumber: Number;
-  bank: string;
-  type: string;
+  bank: BankType;
+  type: AccountType;
 }
 
 export class Recipient extends AggregateRoot<RecipientProps> {
@@ -44,16 +46,36 @@ export class Recipient extends AggregateRoot<RecipientProps> {
     return this.props.accountNumber;
   }
 
-  get bank(): string {
+  get bank(): BankType {
     return this.props.bank;
   }
 
-  get type(): string {
+  get type(): AccountType {
     return this.props.type;
   }
 
   private constructor(props: RecipientProps, id?: UniqueEntityID) {
     super(props, id);
+  }
+
+  public static isValidAccountType(rawTypeAccount: string): boolean {
+    return !(
+      rawTypeAccount !== "Cuenta Corriente" &&
+      rawTypeAccount !== "Cuenta Visa" &&
+      rawTypeAccount !== "Ahorro"
+    );
+  }
+
+  public static isValidBankType(rawTypeBank: string): boolean {
+    return !(
+      rawTypeBank !== "Banco Ripley" &&
+      rawTypeBank !== "Banco Desarrollo" &&
+      rawTypeBank !== "Banco Estado" &&
+      rawTypeBank !== "Banco Chile" &&
+      rawTypeBank !== "Banco Santander" &&
+      rawTypeBank !== "Banco Edwards" &&
+      rawTypeBank !== "Banco BCIbe"
+    );
   }
 
   public static create(props: RecipientProps, id?: UniqueEntityID) {
@@ -69,6 +91,14 @@ export class Recipient extends AggregateRoot<RecipientProps> {
 
     if (!guardResult.succeeded) {
       return Result.fail<Recipient>(guardResult.message);
+    }
+
+    if (!this.isValidAccountType(props.type)) {
+      return Result.fail<Recipient>("Invalid account type provided");
+    }
+
+    if (!this.isValidBankType(props.bank)) {
+      return Result.fail<Recipient>("Invalid bank type provided");
     }
 
     const isNewRecipient = !!id === false;

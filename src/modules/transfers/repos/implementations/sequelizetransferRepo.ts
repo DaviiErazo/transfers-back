@@ -10,20 +10,33 @@ export class SequelizeTransferRepo implements ITransferRepo {
   }
 
   async save(transfer: Transfer): Promise<void> {
-    const transferModel = this.models.Transfer;
+    const TransferModel = this.models.Transfer;
 
     const rawSequelizeTransfer = await TransferMap.toPersistence(transfer);
-    await transferModel.create(rawSequelizeTransfer);
+    await TransferModel.create(rawSequelizeTransfer);
 
     return;
   }
 
-  async getAllTransfers(): Promise<Transfer[]> {
-    const TransferModel = this.models.Transfer;
+  async getTransfers(): Promise<Transfer[]> {
+    let limit = 15
 
-    const Transfer = await TransferModel.findAll();
+    // IMPROVE THIS
+    const Result = await this.models.sequelize.query(
+      `SELECT R.recipient_email, R.recipient_id, R.recipient_name, R.recipient_bank, R.recipient_type, T.transfer_amount
+        FROM transfer T
+        INNER JOIN recipient as R ON R.recipient_id = T.recipient_id limit ${limit}`
+    );
 
-    const transfers = Transfer.map((m) => TransferMap.toDomain(m.dataValues));
+    const transfers = Result[0].map((t) => {
+      return {
+        recipient_email: t.recipient_email,
+        recipient_name: t.recipient_name,
+        recipient_bank: t.recipient_bank,
+        recipient_type: t.recipient_type,
+        transfer_amount: t.transfer_amount,
+      };
+    });
 
     return transfers;
   }
