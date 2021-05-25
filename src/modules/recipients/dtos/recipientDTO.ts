@@ -10,4 +10,5 @@ export interface RecipientDTO {
   accountNumber: Number;
   type: AccountType;
   bank: BankType;
+  isDeleted: boolean;
 }

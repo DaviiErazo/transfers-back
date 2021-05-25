@@ -38,6 +38,11 @@ export default {
           type: Sequelize.STRING(300),
           allowNull: false,
         },
+        is_deleted: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
@@ -84,10 +89,7 @@ export default {
         },
       });
 
-    await runner.run([
-      () => CREATE_RECIPIENT(),
-      () => CREATE_TRANSFER(),
-    ]);
+    await runner.run([() => CREATE_RECIPIENT(), () => CREATE_TRANSFER()]);
   },
 
   down: (queryInterface, Sequelize) => {

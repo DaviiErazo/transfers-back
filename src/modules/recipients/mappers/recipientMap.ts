@@ -17,6 +17,7 @@ export class RecipientMap implements Mapper<Recipient> {
       recipient_account_number: recipient.accountNumber,
       recipient_type: recipient.type,
       recipient_bank: recipient.bank,
+      is_deleted: recipient.isDeleted
     };
   }
 
@@ -35,6 +36,7 @@ export class RecipientMap implements Mapper<Recipient> {
         phoneNumber: raw.recipient_phone_number,
         bank: raw.recipient_bank,
         type: raw.recipient_type,
+        isDeleted: raw.is_deleted
       }, new UniqueEntityID(raw.recipient_id));
 
     recipientOrError.isFailure ? console.log(recipientOrError.error) : "";
@@ -52,6 +54,7 @@ export class RecipientMap implements Mapper<Recipient> {
       accountNumber: recipient.accountNumber,
       type: recipient.type,
       bank: recipient.bank,
+      isDeleted: recipient.isDeleted
     };
   }
 }

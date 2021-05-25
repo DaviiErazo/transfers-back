@@ -6,5 +6,5 @@ export interface IRecipientRepo {
   save(recipient: Recipient): Promise<void>;
   getRecipientByRecipientId (recipientId: string): Promise<Recipient>;
   getRecipientByRecipientName (recipientName: string): Promise<Recipient[]>;
-  deleteRecipientByRecipientId (recipientId: string): Promise<boolean>
+  deleteRecipient(recipient: Recipient): Promise<boolean>
 }

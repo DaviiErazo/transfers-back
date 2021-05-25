@@ -10,6 +10,7 @@ import { RecipientRut } from "./recipientRut";
 import { RecipientCreated } from "./events/RecipientCreated";
 import { BankType } from "./bankType";
 import { AccountType } from "./accountType";
+import { RecipientDeleted } from "./events/RecipientDeleted";
 
 interface RecipientProps {
   email: RecipientEmail;
@@ -19,6 +20,7 @@ interface RecipientProps {
   accountNumber: Number;
   bank: BankType;
   type: AccountType;
+  isDeleted?: boolean;
 }
 
 export class Recipient extends AggregateRoot<RecipientProps> {
@@ -46,6 +48,10 @@ export class Recipient extends AggregateRoot<RecipientProps> {
     return this.props.accountNumber;
   }
 
+  get isDeleted(): boolean {
+    return this.props.isDeleted;
+  }
+
   get bank(): BankType {
     return this.props.bank;
   }
@@ -56,6 +62,13 @@ export class Recipient extends AggregateRoot<RecipientProps> {
 
   private constructor(props: RecipientProps, id?: UniqueEntityID) {
     super(props, id);
+  }
+
+  public delete(): void {
+    if (!this.props.isDeleted) {
+      // this.addDomainEvent(new RecipientDeleted(this));
+      this.props.isDeleted = true;
+    }
   }
 
   public static isValidAccountType(rawTypeAccount: string): boolean {
@@ -103,7 +116,10 @@ export class Recipient extends AggregateRoot<RecipientProps> {
 
     const isNewRecipient = !!id === false;
 
-    const recipient = new Recipient({ ...props }, id);
+    const recipient = new Recipient(
+      { ...props, isDeleted: props.isDeleted ? props.isDeleted : false },
+      id
+    );
 
     if (isNewRecipient) {
       recipient.addDomainEvent(new RecipientCreated(recipient));

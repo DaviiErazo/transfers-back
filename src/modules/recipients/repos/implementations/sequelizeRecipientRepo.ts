@@ -53,18 +53,13 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
     return RecipientMap.toDomain(Recipient);
   }
 
-  async deleteRecipientByRecipientId(recipientId: string): Promise<boolean> {
+  async deleteRecipient(recipient: Recipient): Promise<boolean> {
     const RecipientModel = this.models.Recipient;
 
-    const Recipient = await RecipientModel.findOne({
-      where: {
-        recipient_id: recipientId,
-      },
-    });
+    const values = { is_deleted: true };
+    var condition = { where: { recipient_id: recipient.id.toString() } };
 
-    if (!!Recipient === false) throw new Error("Recipient not found.");
-
-    await Recipient.destroy();
+    await RecipientModel.update(values, condition);
 
     return true;
   }
@@ -76,6 +71,8 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
     detailsQuery.where["recipient_name"] = {
       [this.Op.like]: `${recipientName}%`,
     };
+
+    detailsQuery.where["is_deleted"] = false;
 
     const recipients = await RecipientModel.findAll(detailsQuery);
 

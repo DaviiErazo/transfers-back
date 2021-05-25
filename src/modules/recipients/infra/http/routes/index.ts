@@ -6,7 +6,7 @@ import { getRecipientByRecipientNameController } from "../../../useCases/getReci
 const recipientRouter = express.Router();
 
 recipientRouter.post("/", (req, res) => createRecipientController.execute(req, res));
-recipientRouter.post("/:recipientId", (req, res) => deleteRecipientController.execute(req, res));
+recipientRouter.delete("/:recipientId", (req, res) => deleteRecipientController.execute(req, res));
 recipientRouter.get("/byName", (req, res) => getRecipientByRecipientNameController.execute(req, res));
 
 export { recipientRouter };
