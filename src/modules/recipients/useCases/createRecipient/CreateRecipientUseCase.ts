@@ -24,7 +24,7 @@ export class CreateRecipientUseCase implements UseCase<CreateRecipientDTO, Promi
   async execute(request: CreateRecipientDTO): Promise<Response> {
     const emailOrError = RecipientEmail.create(request.email);
     const rutOrError = RecipientRut.create(request.rut);
-    const nameOrError = RecipientName.create({ name: request.name });
+    const nameOrError = RecipientName.create({ name: request.recipientName });
     const accountNumber = request.accountNumber;
     const phoneNumber = request.phoneNumber;
     const bank = request.bank;

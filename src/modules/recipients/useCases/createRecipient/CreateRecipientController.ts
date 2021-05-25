@@ -19,7 +19,7 @@ export class CreateRecipientController extends BaseController {
     let dto: CreateRecipientDTO = req.body as CreateRecipientDTO;
 
     dto = {
-      name: TextUtils.sanitize(dto.name),
+      recipientName: TextUtils.sanitize(dto.recipientName),
       email: TextUtils.sanitize(dto.email),
       rut: TextUtils.sanitize(dto.rut),
       phoneNumber: TextUtils.sanitize(dto.phoneNumber),
