@@ -2,7 +2,7 @@ import { BaseController } from "../../../../shared/infra/http/models/BaseControl
 import { GetRecipientByRecipientNameUseCase } from "./GetRecipientByRecipientNameUseCase";
 import { DecodedExpressRequest } from "../../../../modules/recipients/infra/http/models/decodedRequest";
 import { GetRecipientByRecipientNameDTO } from "./GetRecipientByRecipientNameDTO";
-import { GetRecipientByRecipientNameResponseDTO } from "./GetRecipientByRecipientNameResponseDTO";
+import { RecipientDTO } from "../../dtos/recipientDTO";
 import * as express from "express";
 import { RecipientMap } from "../../mappers/recipientMap";
 
@@ -32,9 +32,7 @@ export class GetRecipientByRecipientNameController extends BaseController {
       } else {
         const recipientsDetail = result.value.getValue();
 
-        return this.ok<GetRecipientByRecipientNameResponseDTO>(res, {
-          recipients: recipientsDetail.map((c) => RecipientMap.toDTO(c)),
-        });
+        return this.ok<RecipientDTO[]>(res, recipientsDetail.map((c) => RecipientMap.toDTO(c)));
       }
     } catch (err) {
       return this.fail(res, err);

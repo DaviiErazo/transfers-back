@@ -10,7 +10,6 @@ import { RecipientRut } from "./recipientRut";
 import { RecipientCreated } from "./events/RecipientCreated";
 import { BankType } from "./bankType";
 import { AccountType } from "./accountType";
-import { RecipientDeleted } from "./events/RecipientDeleted";
 
 interface RecipientProps {
   email: RecipientEmail;
