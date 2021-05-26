@@ -1,5 +1,5 @@
 import { GetTransfersController } from "./GetTransfersController";
-import { GetTransfersUseCase } from "./getTransfersUseCase";
+import { GetTransfersUseCase } from "./GetTransfersUseCase";
 import { transferRepo } from "../../repos";
 
 const getTransfersUseCase = new GetTransfersUseCase(transferRepo);
