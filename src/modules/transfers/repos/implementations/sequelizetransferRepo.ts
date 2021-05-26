@@ -30,11 +30,11 @@ export class SequelizeTransferRepo implements ITransferRepo {
 
     const transfers = Result[0].map((t) => {
       return {
-        recipient_email: t.recipient_email,
-        recipient_name: t.recipient_name,
-        recipient_bank: t.recipient_bank,
-        recipient_type: t.recipient_type,
-        transfer_amount: t.transfer_amount,
+        email: t.recipient_email,
+        recipientName: t.recipient_name,
+        bank: t.recipient_bank,
+        type: t.recipient_type,
+        amount: t.transfer_amount,
       };
     });
 
