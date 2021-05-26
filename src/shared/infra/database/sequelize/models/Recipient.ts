@@ -25,7 +25,7 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       recipient_account_number: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
       recipient_type: {
