@@ -23,14 +23,14 @@ export class SequelizeTransferRepo implements ITransferRepo {
 
     // IMPROVE THIS
     const Result = await this.models.sequelize.query(
-      `SELECT R.recipient_email, R.recipient_id, R.recipient_name, R.recipient_bank, R.recipient_type, T.transfer_amount
+      `SELECT R.recipient_rut, R.recipient_id, R.recipient_name, R.recipient_bank, R.recipient_type, T.transfer_amount
         FROM transfer T
         INNER JOIN recipient as R ON R.recipient_id = T.recipient_id limit ${limit}`
     );
 
     const transfers = Result[0].map((t) => {
       return {
-        email: t.recipient_email,
+        rut: t.recipient_rut,
         recipientName: t.recipient_name,
         bank: t.recipient_bank,
         type: t.recipient_type,
