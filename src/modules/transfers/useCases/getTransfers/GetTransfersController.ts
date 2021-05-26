@@ -20,9 +20,7 @@ export class GetTransfersController extends BaseController {
         return this.fail(res, error.errorValue().message);
       } else {
         const transfersResult = result.value.getValue();
-        return this.ok<any>(res, {
-          transfers: transfersResult
-        });
+        return this.ok<any>(res, transfersResult);
       }
     } catch (err) {
       return this.fail(res, err);
