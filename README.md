@@ -25,7 +25,6 @@ Casos de uso:
 - [Express.js](https://expressjs.com/) - Servidor web
 - [Mysql](https://www.mysql.com/) - Base de datos
 - [Mailgun](https://www.mailgun.com/) - Servicio para envío de email
-- DDD
 - Domain Driven Design
-
+- Domain Events
 
