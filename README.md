@@ -6,7 +6,7 @@ Backend de app que simula una transferencia de bancos
 
 Casos de uso:
 
-- Crear un nuevo Destinatario
+- Crear un nuevo Destinatario (con envío de email)
 - Realizar transferencia a un destinatario
 - Mostrar historial de transferencias
 
@@ -24,6 +24,7 @@ Casos de uso:
 - [Sequelize](https://github.com/sequelize/sequelize) - The ORM para Node.js
 - [Express.js](https://expressjs.com/) - Servidor web
 - [Mysql](https://www.mysql.com/) - Base de datos
+- [Mailgun](https://www.mailgun.com/) - Servicio para envío de email
 - DDD
 - Domain Driven Design
 
