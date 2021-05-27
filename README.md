@@ -11,8 +11,8 @@ Casos de uso:
 - Mostrar historial de transferencias
 
 
-## Levantar proyecto (dev)
-# Comandos
+### Levantar proyecto (dev)
+#### Comandos
 
 - npm run db:create:dev -> Crea la base de datos
 - npm run migrate:dev -> Crea la migración
