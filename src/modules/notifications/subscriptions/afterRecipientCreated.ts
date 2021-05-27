@@ -21,9 +21,9 @@ export class AfterRecipientCreated implements IHandle<RecipientCreated> {
 
     try {
       await this.sendNotification.execute({
-        userId: recipient.recipientId.id.toString(),
-        email: recipient.email.value,
-      });
+        name: event.recipient.recipientname.value,
+        email: event.recipient.email.value,
+      })
       console.log(
         `[AfterRecipientCreated]: Successfully executed SendNotification use case AfterRecipientCreated`
       );

@@ -20,10 +20,13 @@ export class AfterTransferCreated implements IHandle<TransferCreated> {
     const { transfer } = event;
 
     try {
+      /*
       await this.sendNotification.execute({
         userId: transfer.transferId.id.toString(),
         email: "da.erazom@gmail.com",
+        
       });
+      */
       console.log(
         `[AfterTransferCreated]: Successfully executed SendNotification use case AfterTransferCreated`
       );
