@@ -24,15 +24,14 @@ export class GetRecipientByRecipientNameController extends BaseController {
 
       if (result.isLeft()) {
         const error = result.value;
-
-        switch (error.constructor) {
-          default:
-            return this.fail(res, error.errorValue().message);
-        }
+        return this.fail(res, error.errorValue().message);
       } else {
         const recipientsDetail = result.value.getValue();
 
-        return this.ok<RecipientDTO[]>(res, recipientsDetail.map((c) => RecipientMap.toDTO(c)));
+        return this.ok<RecipientDTO[]>(
+          res,
+          recipientsDetail.map((c) => RecipientMap.toDTO(c))
+        );
       }
     } catch (err) {
       return this.fail(res, err);
