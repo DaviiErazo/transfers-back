@@ -24,7 +24,7 @@ Casos de uso:
 - [Sequelize](https://github.com/sequelize/sequelize) - The ORM para Node.js
 - [Express.js](https://expressjs.com/) - Servidor web
 - [Mysql](https://www.mysql.com/) - Base de datos
-- [Mailgun](https://www.mailgun.com/) - servicio para envío de email
+- [Mailgun](https://www.mailgun.com/) - Servicio para envío de email
 - DDD
 - Domain Driven Design
 
