@@ -23,8 +23,8 @@ Casos de uso:
 
 - [Sequelize](https://github.com/sequelize/sequelize) - The ORM para Node.js
 - [Express.js](https://expressjs.com/) - Servidor web
-- [Mysql] - Base de datos
-- [DDD]
-- [Domain Events]
+- [Mysql](https://www.mysql.com/) - Base de datos
+- DDD
+- Domain Driven Design
 
 
