@@ -3,6 +3,7 @@ import { Recipient } from "../../domain/recipient";
 import { RecipientEmail } from "../../domain/recipientEmail";
 
 import { RecipientMap } from "../../mappers/recipientMap";
+import { RecipientName } from "../../domain/recipientName";
 
 export class SequelizeRecipientRepo implements IRecipientRepo {
   private models: any;
@@ -64,12 +65,16 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
     return true;
   }
 
-  async getRecipientByRecipientName(recipientName: string): Promise<Recipient[]> {
+  async getRecipientByRecipientName(recipientName: string | RecipientName): Promise<Recipient[]> {
     const RecipientModel = this.models.Recipient;
     const detailsQuery = this.createBaseQuery();
 
     detailsQuery.where["recipient_name"] = {
-      [this.Op.like]: `${recipientName}%`,
+      [this.Op.like]: `${
+        recipientName instanceof RecipientName
+          ? (<RecipientName>recipientName).value
+          : recipientName
+      }%`,
     };
 
     detailsQuery.where["is_deleted"] = false;

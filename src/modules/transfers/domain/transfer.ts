@@ -41,7 +41,7 @@ export class Transfer extends AggregateRoot<TransferProps> {
     const transfer = new Transfer({ ...props }, id);
 
     if (isNewTransfer) {
-      // transfer.addDomainEvent(new TransferCreated(transfer));
+      transfer.addDomainEvent(new TransferCreated(transfer));
     }
 
     return Result.ok<Transfer>(transfer);

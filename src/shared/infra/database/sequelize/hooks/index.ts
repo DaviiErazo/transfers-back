@@ -9,13 +9,19 @@ const dispatchEventsCallback = (model: any, primaryKeyField: string) => {
 }
 
 (async function createHooksForAggregateRoots () {
-  const { Recipient } = models;
+  const { Recipient, Transfer } = models;
 
   Recipient.addHook('afterCreate', (m: any) => dispatchEventsCallback(m, 'recipient_id'));
   Recipient.addHook('afterDestroy', (m: any) => dispatchEventsCallback(m, 'recipient_id'));
   Recipient.addHook('afterUpdate', (m: any) => dispatchEventsCallback(m, 'recipient_id'));
   Recipient.addHook('afterSave', (m: any) => dispatchEventsCallback(m, 'recipient_id'));
   Recipient.addHook('afterUpsert', (m: any) => dispatchEventsCallback(m, 'recipient_id'));
+
+  Transfer.addHook('afterCreate', (m: any) => dispatchEventsCallback(m, 'transfer_id'));
+  Transfer.addHook('afterDestroy', (m: any) => dispatchEventsCallback(m, 'transfer_id'));
+  Transfer.addHook('afterUpdate', (m: any) => dispatchEventsCallback(m, 'transfer_id'));
+  Transfer.addHook('afterSave', (m: any) => dispatchEventsCallback(m, 'transfer_id'));
+  Transfer.addHook('afterUpsert', (m: any) => dispatchEventsCallback(m, 'transfer_id'));
 
   console.log('[Hooks]: Sequelize hooks setup.')
 

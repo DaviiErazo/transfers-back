@@ -5,6 +5,7 @@ import { GetRecipientByNameErrors } from "./GetRecipientByRecipientNameErrors";
 import { GetRecipientByRecipientNameDTO } from "./GetRecipientByRecipientNameDTO";
 import { IRecipientRepo } from "../../repos/recipientRepo";
 import { Recipient } from "../../domain/recipient";
+import { RecipientName } from "../../domain/recipientName";
 
 type Response = Either<
   AppError.UnexpectedError | GetRecipientByNameErrors.RecipientNotFoundError,
@@ -22,9 +23,10 @@ export class GetRecipientByRecipientNameUseCase
 
   public async execute(request: GetRecipientByRecipientNameDTO): Promise<Response> {
     let recipientsDetail: Recipient[];
-    const { recipientName } = request;
 
     try {
+      const recipientName = request.recipientName;
+
       recipientsDetail = await this.recipientRepo.getRecipientByRecipientName(recipientName);
     } catch (err) {
       return left(new AppError.UnexpectedError(err));

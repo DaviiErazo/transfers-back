@@ -14,10 +14,10 @@ export class SendNotificationUseCase
 
   public async execute(req: NotificationDTO): Promise<NotificationResponse> {
     const data: IEmail = {
-      from: "David Erazo da.erazom@gmail.com",
+      from: `David Erazo ${req.from}`,
       to: req.email,
-      subject: "Desafio Ripley",
-      text: `El destinatario ${req.name} ha sido creado correctamente! 🥳`,
+      subject: req.subject,
+      text: req.message
     };
 
     await this.services.sendEmail(data);
