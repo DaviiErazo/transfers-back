@@ -7,7 +7,7 @@ Backend de app que simula una transferencia de bancos
 Casos de uso:
 
 - Crear un nuevo Destinatario (con envío de email)
-- Realizar transferencia a un destinatario
+- Realizar transferencia a un destinatario (con envío de email)
 - Mostrar historial de transferencias
 
 
