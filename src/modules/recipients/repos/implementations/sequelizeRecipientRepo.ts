@@ -57,10 +57,13 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
   async deleteRecipient(recipient: Recipient): Promise<boolean> {
     const RecipientModel = this.models.Recipient;
 
-    const values = { is_deleted: true };
-    var condition = { where: { recipient_id: recipient.id.toString() } };
+    const rawSequelizeRecipient = { is_deleted: true };
 
-    await RecipientModel.update(values, condition);
+    await RecipientModel.update(rawSequelizeRecipient, {
+      individualHooks: true,
+      hooks: true,
+      where: { recipient_id: recipient.id.toString() },
+    });
 
     return true;
   }
