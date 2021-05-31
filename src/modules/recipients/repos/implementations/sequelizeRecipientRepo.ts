@@ -1,6 +1,6 @@
 import { IRecipientRepo } from "../recipientRepo";
 import { Recipient } from "../../domain/recipient";
-import { RecipientEmail } from "../../domain/recipientEmail";
+import { RecipientId } from "../../domain/recipientId";
 
 import { RecipientMap } from "../../mappers/recipientMap";
 import { RecipientName } from "../../domain/recipientName";
@@ -22,11 +22,11 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
     };
   }
 
-  async exists(recipientEmail: RecipientEmail): Promise<boolean> {
+  async exists(recipientId: RecipientId): Promise<boolean> {
     const RecipientModel = this.models.Recipient;
     const Recipient = await RecipientModel.findOne({
       where: {
-        recipient_email: recipientEmail.value,
+        recipient_id: recipientId.id.toString(),
       },
     });
     return !!Recipient === true;
@@ -34,7 +34,6 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
 
   async save(recipient: Recipient): Promise<void> {
     const recipientModel = this.models.Recipient;
-    // const exists = await this.exists(recipient.email);
 
     const rawSequelizeUser = await RecipientMap.toPersistence(recipient);
     await recipientModel.create(rawSequelizeUser);
@@ -56,8 +55,8 @@ export class SequelizeRecipientRepo implements IRecipientRepo {
 
   async deleteRecipient(recipient: Recipient): Promise<boolean> {
     const RecipientModel = this.models.Recipient;
-
-    const rawSequelizeRecipient = { is_deleted: true };
+  
+    const rawSequelizeRecipient = { is_deleted: true };    
 
     await RecipientModel.update(rawSequelizeRecipient, {
       individualHooks: true,

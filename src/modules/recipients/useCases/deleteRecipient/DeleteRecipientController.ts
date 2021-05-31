@@ -15,7 +15,7 @@ export class DeleteRecipientController extends BaseController {
 
   async executeImpl(req: DecodedExpressRequest, res: express.Response): Promise<any> {
     const dto: DeleteRecipientDTO = {
-      recipientId: req.params.recipientId
+      recipientId: req.params.recipientId,
     };
 
     try {
@@ -25,7 +25,7 @@ export class DeleteRecipientController extends BaseController {
         const error = result.value;
 
         switch (error.constructor) {
-          case DeleteRecipientErrors.UserNotFoundError:
+          case DeleteRecipientErrors.RecipientNotFoundError:
             return this.notFound(res, error.errorValue().message);
           default:
             return this.fail(res, error.errorValue().message);
