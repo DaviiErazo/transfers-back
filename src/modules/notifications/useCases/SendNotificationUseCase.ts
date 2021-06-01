@@ -14,7 +14,7 @@ export class SendNotificationUseCase
 
   public async execute(req: NotificationDTO): Promise<NotificationResponse> {
     const data: IEmail = {
-      from: `David Erazo ${req.from}`,
+      from: req.from,
       to: req.email,
       subject: req.subject,
       text: req.message

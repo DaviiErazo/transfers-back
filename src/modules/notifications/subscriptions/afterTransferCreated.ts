@@ -19,10 +19,10 @@ export class AfterTransferCreated implements IHandle<TransferCreated> {
 
   setupSubscriptions(): void {
     // Register to the domain event
-    DomainEvents.register(this.onUserCreated.bind(this), TransferCreated.name);
+    DomainEvents.register(this.onTransferCreated.bind(this), TransferCreated.name);
   }
 
-  private async onUserCreated(event: TransferCreated): Promise<void> {
+  private async onTransferCreated(event: TransferCreated): Promise<void> {
     try {
       const { transfer } = event;
       const recipientId = transfer.recipientId;
@@ -34,7 +34,7 @@ export class AfterTransferCreated implements IHandle<TransferCreated> {
       } else {
         const recipient = result.value.getValue();
         await this.sendNotification.execute({
-          email: recipient.email.value,
+          email: `David Erazo ${recipient.email.value}`,
           subject: "Desafio Ripley",
           message: `Se ha realizado una transacción de monto: $${transfer.amount}`,
           from: "da.erazom@gmail.com",
